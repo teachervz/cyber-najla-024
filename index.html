@@ -198,6 +198,13 @@ input{font-family:inherit;-webkit-user-select:text;user-select:text}
 .fc{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.2,.8,.2,1)}
 .fc-wrap:hover .fc:not(.flipped){transform:translateY(-8px)}
 .fc.flipped{transform:rotateY(180deg)}
+/* إصلاح آيباد/سفاري: إظهار الوجه الصحيح عند منتصف القلب بدل الاعتماد على backface-visibility فقط */
+.fc{-webkit-transform-style:preserve-3d}
+.fc-face{-webkit-transform:translateZ(0);transform:translateZ(0);transition:visibility 0s linear .3s}
+.fc-back{-webkit-transform:rotateY(180deg) translateZ(1px);transform:rotateY(180deg) translateZ(1px);visibility:hidden}
+.fc.flipped .fc-back{visibility:visible}
+.fc.flipped .fc-front{visibility:hidden}
+.fc-back .fc-title,.fc-back p{color:#fff}
 .fc-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:var(--r);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:16px;padding:30px;text-align:center}
 .fc-front{background:#fff;border:3px solid var(--line);border-top:14px solid var(--c);box-shadow:var(--shadow)}
